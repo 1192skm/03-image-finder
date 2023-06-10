@@ -1,6 +1,7 @@
 // import { Formic } from 'formik';
 import { Component } from 'react';
-import css from './Searchbar.module.css'
+import css from './Searchbar.module.css';
+import { GoSearch } from 'react-icons/go';
 
 export class SearchBar extends Component {
   state = {
@@ -23,7 +24,7 @@ export class SearchBar extends Component {
       <header className={css.searchbar}>
         <form className={css.searchform} onSubmit={this.handleListSubmit}>
           <button type="submit" className={css.searchformbutton}>
-            <span className={css.searchformbuttonlabel}>Search</span>
+            <span className={css.searchformbuttonlabel}>{GoSearch}</span>
           </button>
 
           <input

@@ -45,16 +45,16 @@ export class App extends Component {
     const { listName, page } = this.state;
     this.abortCtrl = new AbortController();
     try {
-      this.setState(prevState => ({
+      this.setState({
         isLoading: true,
         error: null,
-        page: prevState + 1,
-      }));
-      const images = await getImages(listName, page, {
+      });
+      const images = await getImages(listName, page +1, {
         signal: this.abortCtrl.signal,
       });
       this.setState(prevState => ({
         list: [...prevState.list, ...images],
+        page: prevState.page +1,
       }));
     } catch (error) {
       this.setState({ error: error.message });
@@ -78,9 +78,9 @@ export class App extends Component {
         {error && <h1>{error}</h1>}
         {isLoading && <div>Loading...</div>}
         {!isLoading && <ImageGallery list={list} />}
-        {!isLoading && totalHits > 12 && !error && (
-          <BtnLoadMore onClick={this.handleBtnMoreClick} />
-        )}
+        {!isLoading &&
+          totalHits > 12 &&
+          !error(<BtnLoadMore onClick={this.handleBtnMoreClick} />)}
       </div>
     );
   }

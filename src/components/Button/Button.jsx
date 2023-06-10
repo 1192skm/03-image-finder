@@ -1,6 +1,8 @@
 import css from './Button.module.css'
-export function BtnLoadMore() {
+export function BtnLoadMore({ onClick }) {
     return (
-        <button className={css.button} type="button">Load more</button>
-    )
+      <button onClick={onClick} className={css.button} type="button">
+        Load more
+      </button>
+    );
 }
