@@ -22,7 +22,7 @@ export class App extends Component {
     if (prevState.listName !== this.state.listName) {
       this.abortCtrl = new AbortController();
       try {
-        this.setState({ list: [], isLoading: true, error: null });
+        this.setState({isLoading: true, error: null });
         const images = await getImages(listName, page, {
           signal: this.abortCtrl.signal,
         });
@@ -53,7 +53,7 @@ export class App extends Component {
         signal: this.abortCtrl.signal,
       });
       this.setState(prevState => ({
-        list: [...prevState.list, ...images],
+        list: [...prevState.list, ...images.hits],
         page: prevState.page +1,
       }));
     } catch (error) {
@@ -64,7 +64,8 @@ export class App extends Component {
   };
 
   handleListNameSubmit = listName => {
-    this.setState({ listName });
+    this.setState({ listName, list: [],page:1 });
+
   };
 
   render() {
@@ -78,9 +79,9 @@ export class App extends Component {
         {error && <h1>{error}</h1>}
         {isLoading && <div>Loading...</div>}
         {!isLoading && <ImageGallery list={list} />}
-        {!isLoading &&
-          totalHits > 12 &&
-          !error(<BtnLoadMore onClick={this.handleBtnMoreClick} />)}
+        {!isLoading && totalHits > 12 && !error && (
+          <BtnLoadMore onClick={this.handleBtnMoreClick} />
+        )}
       </div>
     );
   }
