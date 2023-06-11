@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { BtnLoadMore } from './Button/Button';
 import { ImageGallery } from './ImageGallery/ImageGallery';
-// import { Loader } from './Loader/Loader';
+import { MagnifyingGlass } from 'react-loader-spinner';
 import { SearchBar } from './Searchbar/Searchbar';
 import { getImages } from 'services/api';
 import css from './App.module.css';
@@ -75,9 +75,13 @@ export class App extends Component {
           className={css.searchbar}
           onSubmit={this.handleListNameSubmit}
         />
-        {error && <h1>{error}</h1>}
-        {isLoading && <div>Loading...</div>}
-        {!isLoading && <ImageGallery list={list} />}
+        {error && <h1 className={css.error}>{error}</h1>}
+        {isLoading && (
+          <div className={css.loader}>
+            <MagnifyingGlass height="80" width="80" />
+          </div>
+        )}
+        <ImageGallery list={list} />
         {!isLoading && totalHits > 12 && !error && (
           <BtnLoadMore onClick={this.handleBtnMoreClick} />
         )}
