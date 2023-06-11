@@ -22,7 +22,7 @@ export class App extends Component {
     if (prevState.listName !== this.state.listName) {
       this.abortCtrl = new AbortController();
       try {
-        this.setState({isLoading: true, error: null });
+        this.setState({ isLoading: true, error: null });
         const images = await getImages(listName, page, {
           signal: this.abortCtrl.signal,
         });
@@ -64,8 +64,7 @@ export class App extends Component {
   };
 
   handleListNameSubmit = listName => {
-    this.setState({ listName, list: [],page:1 });
-
+    this.setState({ listName, list: [], page: 1 });
   };
 
   render() {
