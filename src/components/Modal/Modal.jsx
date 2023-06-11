@@ -27,18 +27,18 @@ const customStyles = {
 
 Modal.setAppElement('#root');
 
-export function ModalWindow(props) {
-  console.log(props.isOpen);
+export function ModalWindow({ isOpen, closeModal, description, largeImage }) {
+
   return (
     <div>
       <Modal
-        isOpen={props.isOpen}
-        onRequestClose={props.closeModal}
+        isOpen={isOpen}
+        onRequestClose={closeModal}
         style={customStyles}
         onAfterOpen={() => disableBodyScroll(document)}
         onAfterClose={() => enableBodyScroll(document)}
       >
-        <img src={props.largeImage} alt={props.description} />
+        <img src={largeImage} alt={description} />
       </Modal>
     </div>
   );
